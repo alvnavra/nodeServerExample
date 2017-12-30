@@ -4,13 +4,12 @@ const bodyParser     = require('body-parser');
 const db             = require('./config/db');
 const app            = express();
 
-const port = 4000;
+const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 MongoClient.connect(db.url, (err, database) => {
     if (err) return console.log(err)
     require('./routes/note_routes')(app, database);
-    console.log('database ==>'+database)
     app.listen(port, () => {
       console.log('We are live on ' + port);
     });               
